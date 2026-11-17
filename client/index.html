@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BattleZone" />
+  <title>BattleZone</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <h1 class="loading-title">BattleZone</h1>
+      <div class="loading-bar-container">
+        <div class="loading-bar" id="loading-bar"></div>
+      </div>
+      <p class="loading-text" id="loading-text">Loading assets...</p>
+    </div>
+  </div>
+
+  <!-- Game container -->
+  <div id="game-container"></div>
+
+  <!-- Scripts: CDN first -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+
+  <!-- Game scripts in dependency order -->
+  <script src="js/config.js"></script>
+  <script src="js/network.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/scenes/BootScene.js"></script>
+  <script src="js/scenes/UIScene.js"></script>
+  <script src="js/scenes/GameScene.js"></script>
+
+  <!-- Bootstrap Phaser -->
+  <script>
+    window.addEventListener('load', () => {
+      // Hide loading screen once Phaser is ready
+      const config = {
+        type: Phaser.AUTO,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        backgroundColor: '#0d0d1a',
+        parent: 'game-container',
+        scale: {
+          mode: Phaser.Scale.RESIZE,
+          autoCenter: Phaser.Scale.CENTER_BOTH
+        },
+        dom: {
+          createContainer: true
+        },
+        physics: {
+          default: 'arcade',
+          arcade: {
+            gravity: { y: 0 },
+            debug: false
+          }
+        },
+        scene: [BootScene, GameScene, UIScene]
+      };
+
+      const game = new Phaser.Game(config);
+
+      // Remove loading screen once Phaser fires its first ready signal
+      game.events.once('ready', () => {
+        const ls = document.getElementById('loading-screen');
+        if (ls) {
+          ls.style.opacity = '0';
+          setTimeout(() => ls.remove(), 600);
+        }
+      });
+
+      window.GAME = game;
+    });
+  </script>
+</body>
+</html>
