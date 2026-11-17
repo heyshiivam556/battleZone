@@ -79,13 +79,31 @@ const WEAPON_STATS = {
   },
 };
 
+const path = require('path');
+
 // ─── App / Server Setup ───────────────────────────────────────────────────────
 
 const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-/** Simple health-check endpoint. */
+// Serve static frontend if client folder is present
+app.use(express.static(path.join(__dirname, '../client')));
+
+/** Server status & health endpoints */
+app.get('/', (_req, res) => {
+  res.send(`
+    <html>
+      <head><title>BattleZone Server</title></head>
+      <body style="background:#1a1a2e;color:#fff;font-family:sans-serif;text-align:center;padding:50px;">
+        <h1 style="color:#e94560;">🎮 BattleZone Server is Online</h1>
+        <p>Active rooms: ${rooms.size}</p>
+        <p>Health endpoint: <a href="/health" style="color:#44aaff;">/health</a></p>
+      </body>
+    </html>
+  `);
+});
+
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', rooms: rooms.size });
 });

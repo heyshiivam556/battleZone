@@ -1,0 +1,8 @@
+{
+  "name": "battlezone-game",
+  "version": "1.0.0",
+  "description": "BattleZone - 2D Cross-Platform Multiplayer Browser Shooter",
+  "scripts": {
+    "build": "echo Build ready"
+  }
+}
