@@ -5,7 +5,7 @@
 const MAP_WIDTH  = 2400;
 const MAP_HEIGHT = 2400;
 const TILE_SIZE  = 48;
-const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = 'https://battlezone-txsp.onrender.com';
 
 const PLAYER_SPEED = 220;
 const PLAYER_SIZE  = 24;

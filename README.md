@@ -2,6 +2,8 @@
 
 > **Cross-platform 2D multiplayer top-down browser shooter — no install required!**
 
+## 🌐 Live Server: [battlezone-txsp.onrender.com](https://battlezone-txsp.onrender.com)
+
 ![BattleZone](https://img.shields.io/badge/BattleZone-Multiplayer%20Shooter-e94560?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Web%20%7C%20Mobile%20%7C%20Desktop-0f3460?style=for-the-badge)
 ![PWA](https://img.shields.io/badge/PWA-Ready-4CAF50?style=for-the-badge)
